@@ -27,5 +27,10 @@ angular.module('bsSwitchApp')
 
     $scope.toggleActivation = function() {
       $scope.isActive = !$scope.isActive;
+    };
+
+    $scope.changeCallback = function(element,event,state){
+      console.log("changeCallback: "+state);
     }
+
   });

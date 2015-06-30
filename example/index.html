@@ -93,7 +93,8 @@
     switch-wrapper="{{ wrapper }}"
     ng-true-value="'yep'"
     ng-false-value="'nope'"
-    switch-inverse="{{ !inverse }}">
+    switch-inverse="{{ !inverse }}"
+    switch-change="changeCallback">
 
   <input type="button" value="toggle value" ng-click="toggle()">
   <input type="button" value="toggle value / activation" ng-click="toggle(); toggleActivation();">
