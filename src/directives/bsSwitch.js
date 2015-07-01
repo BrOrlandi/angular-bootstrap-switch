@@ -6,7 +6,7 @@ angular.module('frapontillo.bootstrap-switch')
       restrict: 'A',
       require: 'ngModel',
       scope: {
-      		'switchChange': '&'
+        'switchChange': '&'
       },
       link: function link(scope, element, attrs, controller) {
         var isInit = false;
@@ -231,7 +231,8 @@ angular.module('frapontillo.bootstrap-switch')
               // $setViewValue --> $viewValue --> $parsers --> $modelValue
               controller.$setViewValue(e.target.checked);
               var callback = scope.switchChange();
-              callback(this,e,state);
+              if(typeof callback === "function")
+                callback(this,e,state);
             });
           }
         };

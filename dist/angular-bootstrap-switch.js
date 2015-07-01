@@ -1,6 +1,6 @@
 /**
  * angular-bootstrap-switch
- * @version v0.4.1 - 2015-06-15
+ * @version v0.4.1 - 2015-07-01
  * @author Francesco Pontillo (francescopontillo@gmail.com)
  * @link https://github.com/frapontillo/angular-bootstrap-switch
  * @license Apache License 2.0(http://www.apache.org/licenses/LICENSE-2.0.html)
@@ -20,6 +20,7 @@ angular.module('frapontillo.bootstrap-switch').directive('bsSwitch', [
     return {
       restrict: 'A',
       require: 'ngModel',
+      scope: { 'switchChange': '&' },
       link: function link(scope, element, attrs, controller) {
         var isInit = false;
         /**
@@ -223,9 +224,12 @@ angular.module('frapontillo.bootstrap-switch').directive('bsSwitch', [
             });
           } else {
             // When the checkbox switch is clicked, set its value into the ngModel
-            element.on('switchChange.bootstrapSwitch', function (e) {
+            element.on('switchChange.bootstrapSwitch', function (e, state) {
               // $setViewValue --> $viewValue --> $parsers --> $modelValue
               controller.$setViewValue(e.target.checked);
+              var callback = scope.switchChange();
+              if (typeof callback === 'function')
+                callback(this, e, state);
             });
           }
         };
